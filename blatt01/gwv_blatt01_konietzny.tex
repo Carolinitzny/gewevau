@@ -1,0 +1,99 @@
+\newcommand{\authorinfo}{Carolin Konietzny}
+\newcommand{\titleinfo}{GWV, Blatt 01}
+
+% PREAMBLE ===============================================================
+
+\documentclass[a4paper,11pt]{article}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1in, left=1.0in, right=0.6in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{breqn}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+\author{\authorinfo}
+\title{\titleinfo}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item[\textbf{1.}]
+    \begin{description}
+    \item[Anwendung 1] 
+        Eine mögliche Anwendung wird in den sogenannten Smart-Citys in der Verkehsführung angewendet. Beispielsweise kann das Ampelsystem eine AI enthalten. Die AI  kümmert sich darum, die Ampeln so zu schalten, wie es die Umgebung gerade erfordert. Hierbei wird zum Beispiel auf Rush-Hours, aber auch auf unbenutzbare Spuren der Straße geachtet, also teilweise unvorhergesehene Ereignisse.
+
+        Das gewünschte Ziel ist, dass auf plötzliche Einflüsse in den Verkehr schnell und intelligent reagiert wird. Hierbei sollen Fälle aus der Vergangenheit genutzt werden, um zu entscheiden, wie die Verkehrsführung in einer bestimmten Situation am besten abläuft.
+
+        http://time.com/3845445/commuting-times-adaptive-traffic-lights/
+
+        Ein Nicht-intelligentes System liefert kein optimales Ergebnis, da es nicht auf verschiedene Situationen reagieren kann. So könnte eine Ampel also Grün sein, obwohl kein Auto in der Nähe ist.
+
+        Das Thema Verkehr ist sehr komplex, es gibt zum Beispiel keine guten Modelle für Staubildung.
+        Eine AI zu entwickeln, die möglichst präzise und schnell auf die verschiedensten Verkehrssituationen reagieren kann, muss sehr umfangreich sein.
+
+
+    \item[Anwendung 2]
+        Eine weitere Anwendung könnte zukünftig sein, Waren in einem Laden dynamisch so zu platzieren, dass auf die derzeitige Nachfrage der Kundschaft, aber auch auf die Verfügbarkeit der Ware Rücksicht genommen wird.
+        Dies könnte also bedeuten, dass sich morgens in Kassennähe eher Alltagswaren befinden, zum Feierabend oder Wochenende jedoch Bier oder Knabberzeug nach vorne rücken.
+        Dadurch könnten dann höhere Einnahmen erzielt werden, genauso wie ein größerer Komfort beim täglichen Einkauf.
+
+        Um die ganzen Daten sinnvoll auszuwerten und dazu passende Entscheidungen zu treffen, benötigt man eine AI.
+        Diese kann die Auswirkung ihrer Entscheidungen sehr leicht bewerten und dieses erlangte Wissen für zukünftige Entscheidungsfindungen einsetzen.
+
+    \item[Anwendung 3]
+        Die letzte Anwendung ist im Bereich der Spracherkennung. Hierbei muss die AI die Spracheingabe sowohl akkustisch korrekt aufnehmen, als auch inhaltlich verstehen, um gezielte Entscheidungen zu treffen.
+
+        Hierfür gibt es schon viele Ansätze, die mehr oder weniger gut funktionieren.
+        GoogleNow und Siri sind hier als bekannte Beispiele zu nennen.
+
+        Damit die Sprache nicht nur akkustisch sondern auch inhaltlich bearbeitet werden kann, ist eine AI vonnöten.
+
+    \end{description}
+\newpage
+\item[\textbf{2.}]
+    
+
+    \begin{enumerate}
+    \item \textbf{Information}:
+        \begin{itemize}
+            \item Geburtstage
+            \item Aktienkurse
+        \end{itemize}
+    \item \textbf{Implicit knowledge}:
+        \begin{itemize}
+            \item Sprache:
+                Sprache kann nicht mit Sprache oder Code erklärt oder beschrieben werden.
+            \item Gesichtserkennung:
+                Das menschliche Gehirn ist stark spezialisiert auf Gesichtserkennung. Man kann Gesichter, die man einmal gesehen hat, oft wiedererkennen, ohne sich an einzelne, beschreibbare Merkmale erinnern zu können.
+        \end{itemize}
+    \item \textbf{Explicit knowledge}:
+        \begin{itemize}
+            \item Geburtstage
+            \item Telefonnummern:
+            Sowohl Geburtstage, als auch Telefonnummern kann man einfach kommunizieren und in Code darstellen.
+        \end{itemize}
+    \end{enumerate}
+
+    Nehmen wir an, ein Agent befindet sich in einem Labyrinth. Er kennt zwar seine aktuelle, sichtbare Umgebung, jedoch nicht das komplette Labyrinth. Da er nicht alles beobachten kann (partially observable), wird er einige Sackgassen erkunden müssen, bevor er den richtigen Weg aus dem Labyrinth gefunden hat.
+
+    Es gibt viele virtuelle Agenten, die den Aktienmarkt beobachten. Trotzdem können sie keine hundertporzentig zuverlässige Entscheidung treffen, was Aktienkäufe angeht. Dies liegt daran, dass die Aktionen von dem Agenten selbst, wie auch die von anderen Akteuren nicht genau vorherzusagen sind. (stochastic)
+\end{enumerate}
+\end{document}

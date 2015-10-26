@@ -1,0 +1,8 @@
+*.aux
+*.log
+*.dvi
+*.synctex.gz
+*~
+~*
+*.user
+__MACOS

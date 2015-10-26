@@ -1,0 +1,81 @@
+
+% PREAMBLE ===============================================================
+
+\documentclass[a4paper,11pt]{article}
+\usepackage[german,ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=1.3in, bottom=1in, left=1.0in, right=0.6in]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{pgfplots}
+\usepackage{breqn}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+
+\newcommand{\authorinfo}{Stephan Tietz, Katja Möhring, Carolin Konietzny}
+\newcommand{\titleinfo}{GWV, Blatt 02}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+
+\author{\authorinfo}
+\title{\titleinfo}
+\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\authorinfo}
+\fancyhead[R]{\titleinfo}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item[\textbf{1.}]
+    \begin{enumerate}
+    \item[\textbf{1}]
+
+        One node should contain the information where we are, so a node in the transportation network.
+        However we should also keep track of the time spent so far to get to the node, we definitely need a
+        global clock to check the timetable. Thirdly we should save the information how we are travelling at
+        the moment. This might not be necessary if we preserve that information in our location as well
+        (exp.: what platform we are on at what time tells us what train we might be on)
+        An edge in this state-space representation would stand for traveling between links from one stop to
+        another using the mode of transportation we are currently on or staying at the same location but
+        changing the train or bus. The edge should also have a weight of how much time it costs to use this
+        link and get to the new state.
+
+    \item[\textbf{2}]
+        \begin{enumerate}
+        \item[a)]
+            $(0,0) \rightarrow (0,3) \rightarrow (3,0) \rightarrow (3,3) \rightarrow (4,2) \rightarrow (0,2) \rightarrow (2,0)$
+
+        \item[b)]
+            The four litre jug needs to be emptied once, one could pour the wine from the jug back to
+            where the wine came from but I guess that is not asked. There is no way not to pour more than 2
+            litres in a jug because there is no way to measure less than 3 litres, therefore we have to waste wine.
+        \end{enumerate}
+
+    \end{enumerate}
+\item[\textbf{2.}]
+    Wir nehmen das Beispiel eines Agenten, der durch ein Labyrinth gehen soll.
+    Wir legen eine Art Gitter über das Labyrinth, wobei jeder Knotenpunkt eine Stelle im Labyrinth markiert, die eine Kreuzung ist, sowie einen Knoten für Start(aktuelle Position des Agenten, start state) und Ziel (Ausgang des Labyrinths, end state).
+
+    Nun werden alle Knoten miteinander verbunden. Hier gehen wir wie folgt vor:
+    Ist ein Knoten a durch eine Kante mit Knoten b verbindbar, ohne dabei eine Labyrinthwand zu durchkreuzen, so sollen diese beiden Knoten mit einer Kante verbunden werden.
+
+    Was nun entsteht ist ein Suchbaum (search space), den man mit einem einfachen Algorithmus durchlaufen kann (zum Beispiel A*).
+
+    Problematisch könnte es werden, falls man den Endzustand nicht kennt.
+    Man müsste das Gitter so ausweiten, dass nicht nur Kreuzungen einen Knotenpunkt bilden, sondern auch einzelne Pfade. 
+    Diese könnten nämlich entweder ein möglicher Ausgang des Labyrinths (also ein Endzustand) sein, oder eine Sackgasse.
+    Der Agent müsste eine Möglichkeit haben, einen solchen Knotenpunkt richtig zu bewerten und danach zu handeln, zum Beispiel durch Erweiterung des Suchraumes.
+
+    
+\end{enumerate}
+\end{document}
