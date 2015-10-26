@@ -2,6 +2,7 @@
 *.log
 *.dvi
 *.synctex.gz
+*.toc
 *~
 ~*
 *.user
