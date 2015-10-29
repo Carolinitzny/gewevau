@@ -68,10 +68,14 @@ public class Knoten {
 		return vorgaenger;
 	}
 	
-	public void printPath(){
+	public int printPath(){
 		if(vorgaenger != null){
-			vorgaenger.printPath();
+			int tiefe = vorgaenger.printPath();
+			System.out.println("Länge: "+ tiefe+" x: "+x + "   y: "+y);
+			return tiefe +1;
 		}
-		System.out.println("x: "+x + "   y: "+y);
+		System.out.println("Länge: "+ 0+"|   x: "+x + " y: "+y);
+		return 0;
+		
 	}
 }
