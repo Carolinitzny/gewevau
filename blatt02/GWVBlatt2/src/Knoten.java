@@ -6,18 +6,24 @@ public class Knoten {
 
 	
 	
-	private boolean open;
+
 	private boolean closed;
 	private boolean blocked;
 	private boolean start;
 	private boolean end;
 	
+	private int x, y;
+	
 	private ArrayList<Knoten> nachbarn;
 	
-	public Knoten(boolean blocked, boolean start, boolean end) {
+	private Knoten vorgaenger;
+	
+	public Knoten(boolean blocked, boolean start, boolean end, int x, int y) {
 		this.blocked = blocked;
 		this.start = start;
 		this.end = end;
+		this.x = x;
+		this.y = y;
 		nachbarn = new ArrayList<>();
 	}
 	
@@ -25,10 +31,7 @@ public class Knoten {
 		nachbarn.add(k);
 	}
 	
-	public boolean isOpen() {
-		return open;
-	}
-	
+
 	
 	public boolean isClosed(){
 		return closed;
@@ -50,4 +53,25 @@ public class Knoten {
 		return nachbarn;
 	}
 	
+	public void setClosed(){
+		closed = true;
+	}
+	
+	public void setOpen(){
+		closed = false;
+	}
+	public void setVorgaenger(Knoten k){
+		vorgaenger=k;
+	}
+	
+	public Knoten getVorgaenger(){
+		return vorgaenger;
+	}
+	
+	public void printPath(){
+		if(vorgaenger != null){
+			vorgaenger.printPath();
+		}
+		System.out.println("x: "+x + "   y: "+y);
+	}
 }

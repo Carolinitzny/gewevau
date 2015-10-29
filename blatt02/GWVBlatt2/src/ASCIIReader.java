@@ -20,7 +20,9 @@ public class ASCIIReader {
         	List<String> lines = Files.readAllLines(path);
         	Knoten[][] knoten = new Knoten[lines.size()][lines.get(0).length()];
         	for(String s : lines){
+        		System.out.println(s);
         		createKnotenForRow(s, row, knoten);
+        		row++;
         	}
         	setNachbarn(knoten);
         	return knoten;
@@ -35,16 +37,16 @@ public class ASCIIReader {
 	public void createKnotenForRow(String s, int row, Knoten[][] knoten){
 		for(int i = 0; i < s.length();i++){
 			char c = s.charAt(i);
-			if(c == 'X'){
-				knoten[row][i] = new Knoten(true, false, false);
+			if(c == 'x'){
+				knoten[row][i] = new Knoten(true, false, false, i, row);
 			}else if(c=='s'){
-				knoten[row][i] = new Knoten(false, true, false);
+				knoten[row][i] = new Knoten(false, true, false, i, row);
 			}
 			else if(c=='g'){
-				knoten[row][i] = new Knoten(false, false, true);
+				knoten[row][i] = new Knoten(false, false, true, i, row);
 			}
 			else if(c==' '){
-				knoten[row][i] = new Knoten(false, false, false);
+				knoten[row][i] = new Knoten(false, false, false, i, row);
 			}
 		}
 		
@@ -53,7 +55,7 @@ public class ASCIIReader {
 	
 	public void setNachbarn(Knoten[][] knoten){
 		for(int row = 1; row < knoten.length-1; row++){
-			for(int collumn = 1; collumn < knoten[0].length; collumn++){
+			for(int collumn = 1; collumn < knoten[0].length-1; collumn++){
 				Knoten k = knoten[row][collumn];
 				Knoten obererNachbar = knoten[row-1][collumn];
 				Knoten untererNachbar = knoten[row+1][collumn];
