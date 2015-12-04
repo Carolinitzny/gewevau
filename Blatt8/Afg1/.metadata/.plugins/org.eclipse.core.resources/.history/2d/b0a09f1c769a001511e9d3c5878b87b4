@@ -1,0 +1,23 @@
+import java.util.HashMap;
+
+
+public class StateLib {
+
+	
+	
+	HashMap<String, State> dic;
+	
+	public StateLib() {
+		dic = new HashMap<String, State>();
+	}
+	
+	
+	public void handleToken(String newWord, String lastWord){
+		if(!dic.containsKey(newWord)){
+			dic.put(newWord, new State());
+		}
+		if(lastWord != null){
+			dic.get(lastWord).addTransition(newWord);
+		}
+	}
+}

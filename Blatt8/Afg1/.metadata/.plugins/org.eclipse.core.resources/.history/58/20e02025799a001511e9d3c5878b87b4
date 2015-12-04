@@ -1,0 +1,33 @@
+import java.io.FileNotFoundException;
+
+
+public class main {
+
+	
+	public static final String file = "heiseticker-text.txt";
+	public static final String start = "LABOUR";
+	public static final int length = 100; 
+	
+	public static void main(String[] args) {
+		
+		
+		
+		StateLib lib = new StateLib();
+		
+		lib.initialiseLib(file);
+		
+		
+		if(lib.contains(start)){
+			System.err.println("No transitions for start word known");
+			return;
+		}
+		
+		String key = start;
+		for (int i = 0; i < length; i++){
+			System.out.print(key + " ");
+			key = lib.getNextWord(key);
+		}
+		
+		
+	}
+}
