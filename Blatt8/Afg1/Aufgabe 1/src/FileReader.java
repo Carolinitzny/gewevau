@@ -6,6 +6,13 @@ import java.io.InputStreamReader;
 
 public class FileReader {
 
+	
+	/**
+	 * Reads the specified file line by line. All tokens are converted to uppercase.
+	 * @param file
+	 * @param lib
+	 * @throws FileNotFoundException
+	 */
 	public void fillLibrary(String file, StateLib lib) throws FileNotFoundException {
 
 		FileInputStream fstream;
@@ -18,17 +25,15 @@ public class FileReader {
 		try {
 			while ((newLine = br.readLine()) != null) {
 				newLine = newLine.toUpperCase();
-				lib.handleToken(newLine, lastLine);
+				lib.handleToken(newLine, lastLine); //creates a new state for new lane (if necessary) and adds a transition to state of lastLine
 				lastLine = newLine;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				br.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

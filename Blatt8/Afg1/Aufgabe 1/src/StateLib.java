@@ -13,6 +13,10 @@ public class StateLib {
 	}
 	
 	
+	/**
+	 * Initialises states by reading the specified file, then computes transition probabilities for each state.
+	 * @param file
+	 */
 	public void initialiseLib(String file){
 		try {
 			new FileReader().fillLibrary(file, this);
@@ -20,12 +24,19 @@ public class StateLib {
 			System.err.println(e.getMessage());
 			return;
 		}
+		
+		
 		for(State s : dic.values()){
 			s.calcProbabilities();
 		}
 	}
 	
 	
+	/**
+	 * Adds a new state for newWord and a transition from lastWord to newWord
+	 * @param newWord
+	 * @param lastWord
+	 */
 	public void handleToken(String newWord, String lastWord){
 		if(!contains(newWord)){
 			dic.put(newWord, new State(newWord));

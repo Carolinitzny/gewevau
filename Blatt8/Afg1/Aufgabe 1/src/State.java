@@ -10,6 +10,8 @@ public class State {
 	
 	private String word;
 	
+	
+	
 	public State(String word) {
 		transitions = new HashMap<String, Integer>();
 		totalTransitions = 0;
@@ -27,6 +29,10 @@ public class State {
 	
 	
 	
+	/**
+	 * The probability for each transition to another state is the number of 
+	 * occurences of this transition divided by the total number of transitions leaving this state.
+	 */
 	public void calcProbabilities(){
 		probabilities = new double[transitions.size()];
 		words = new String[transitions.size()];
@@ -40,7 +46,12 @@ public class State {
 		
 	}
 	
-	
+	/**
+	 * Returns a random next word from all possible transitions.
+	 * A random number between 0 and 1 is taken, then likelihood of all possible transitions is summed 
+	 * to represent likelihoood intervalls of each transition.
+	 * @return
+	 */
 	public String getNextWord(){
 		if(totalTransitions==0){
 			return null; //if this word has no know next words
