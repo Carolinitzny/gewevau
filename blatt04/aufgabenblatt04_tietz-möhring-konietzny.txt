@@ -1,0 +1,30 @@
+Aufgabe 2:
+
+Der Algorithmus terminiert nachdem er alle Felder besucht hat. Kein Feld wird mehrfach
+besucht, also muss es immer terminieren (endliche Zahl Felder). Es sind keine Anpassungen
+nötig.
+
+Aufgabe 3:
+
+Wir nehmen an, dass ein Feld mit einem Portal (in diesem Fall 1 oder 2) nicht ausschließlich als Portal genutzt
+werden kann, sondern auch als normales Feld. Der Roboter DARF kostenlos teleportieren, muss aber nicht.
+
+Für die Variante mit den Portalen können wir keine einfache Heuristik aufstellen, daher verwenden wir die 
+Konstante 0 (garantiert underestimate) --> der A*-Algorithmus wird zur Breitensuche.
+
+Aufgabe 4:
+
+1) 
+    Operationsanzahl: 94
+    Maximale Größe der Frontier: 11
+2) 
+    Operationsanzahl: 99
+    Maximale Größe der Frontier: 11
+3) mit Portalen
+    Operationsanzahl: 80
+    Maximale Größe der Frontier: 17
+3) ohne Portale 
+    Operationsanzahl: 41
+    Maximale Größe der Frontier: 13
+
+
