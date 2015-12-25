@@ -66,8 +66,8 @@ end
 B = tdfread('hdt-10001-12000-test.tags');
 testwords = cellstr(B.x0xEF0xBB0xBFDazu);
 testtags = cellstr(B.PROAV);
-observations = testwords(1:1000);
-real_tags = testtags(1:1000);
+observations = testwords(1:100);
+real_tags = testtags(1:100);
 
 %observations = {'An','der','Nasdaq','rutschte'	,'das'	,'Papier','am'};
 %'An'APPR
@@ -137,6 +137,6 @@ plot(mean(a));
 plot(var(a));
 plot(unknown);
 legend('classification: true = 1, false = 0',...
-    'mean of "a" matrix', ...
-    'variance of "a" matrix', ...
-    'word unknown: true = 1, false = 0');
+    'mean of "a" matrix' ...
+    'variance of "a" matrix' ...
+    );
