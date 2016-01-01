@@ -60,22 +60,16 @@ end
 %% forward algorithm
 
 % use testfile as input for forward algorithm
-%B = tdfread('hdt-10001-12000-test.tags');
-%testwords = cellstr(B.x0xEF0xBB0xBFDazu);
-%testtags = cellstr(B.PROAV);
-%observations = testwords(1:100);
-%real_tags = testtags(1:100);
+B = tdfread('hdt-10001-12000-test.tags');
+testwords = cellstr(B.x0xEF0xBB0xBFDazu);
+testtags = cellstr(B.PROAV);
+observations = testwords(1:100);
+real_tags = testtags(1:100);
 
 % uncomment this code to use manual input
-observations = {'An','der','Nasdaq','rutschte'	,'das'	,'Papier','am'};
-real_tags = {'APPR';'ART';'NE';'VVFIN';'ART';'NN';'APRART'};
-%'An'APPR
-%'der'	ART
-%'Nasdaq'	NE
-%'rutschte'	VVFIN
-%'das'	ART
-%'Papier'	NN
-%'am'	APPRART
+%observations = {'An','der','Nasdaq','rutschte'	,'das'	,'Papier','am'};
+%real_tags = {'APPR';'ART';'NE';'VVFIN';'ART';'NN';'APRART'};
+
 observation_length = length(observations);
 
 a = zeros(tag_vocabulary_length,observation_length);
