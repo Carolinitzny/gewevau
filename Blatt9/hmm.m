@@ -26,10 +26,14 @@ for i = 2:length(tags)
     toTag = tag_index(i);
     transitions(fromTag,toTag) = transitions(fromTag,toTag)+1;
 end
-%transitions = transitions/(length(words)-1);
+
+
 figure(); hold all;
-surf(transitions);
+surf([transitions;zeros(1,tag_vocabulary_length)]);
 title('Tag Transition Probabilities'); 
+set(gca,'YTick',(1:tag_vocabulary_length),'YTickLabel',tag_vocabulary);
+set(gca,'XTick',(1:tag_vocabulary_length),'XTickLabel',tag_vocabulary);
+
 colorbar;
 
 
@@ -47,29 +51,24 @@ for i = 2:length(words)
     toWord = word_index(i);
     observation_probs(fromTag,toWord) = observation_probs(fromTag,toWord)+1;
 end
-%observation_probs = observation_probs/(length(words)-1);
-
-%figure(); hold all;
-%surf(observation_probs);
-%title('Observation probabilities')
-%colorbar;
 
 
 
 
 
-%%
-% forward algorithm
 
+%% forward algorithm
 
-%%
-B = tdfread('hdt-10001-12000-test.tags');
-testwords = cellstr(B.x0xEF0xBB0xBFDazu);
-testtags = cellstr(B.PROAV);
-observations = testwords(1:1000);
-real_tags = testtags(1:1000);
+% use testfile as input for forward algorithm
+%B = tdfread('hdt-10001-12000-test.tags');
+%testwords = cellstr(B.x0xEF0xBB0xBFDazu);
+%testtags = cellstr(B.PROAV);
+%observations = testwords(1:100);
+%real_tags = testtags(1:100);
 
-%observations = {'An','der','Nasdaq','rutschte'	,'das'	,'Papier','am'};
+% uncomment this code to use manual input
+observations = {'An','der','Nasdaq','rutschte'	,'das'	,'Papier','am'};
+real_tags = {'APPR';'ART';'NE';'VVFIN';'ART';'NN';'APRART'};
 %'An'APPR
 %'der'	ART
 %'Nasdaq'	NE
@@ -103,18 +102,19 @@ for t = 2:observation_length
         ind_cur_obs = word_vocabulary_length;
         unknown(t) = 1;
     end
-    a(:,t) =  (a(:,t-1)' *  transitions) .* observation_probs(:,ind_cur_obs)';
     
+    %calculate a(t)
+    a(:,t) =  (a(:,t-1)' *  transitions) .* observation_probs(:,ind_cur_obs)'; 
+    %normalize a(t)
     a(:,t) = a(:,t)/norm(a(:,t));
-    [val, ind ] = max(a(:,t));
-    %disp({tag_vocabulary{ind} , cur_obs});
-    
+
+    %choose tag with max value in a(t) as current tag
+    [val, ind ] = max(a(:,t));    
     prediction{t} = tag_vocabulary{ind};
 end
 
 %%
-% compare arrays
-
+% compare prediction and actual tags
 correct_tags = sum(cellfun(@strcmp, prediction, real_tags));
 error_tags = observation_length - correct_tags;
 
@@ -122,14 +122,18 @@ error_tags = observation_length - correct_tags;
 disp('Error in %: ');
 (error_tags/observation_length)*100
 
+
+%% Display a(t). Each collumn responds to one timestep/word.
+% If only one filed per collumn is yellow, the decision was quite clear, if
+% many are colored, the decision was unclear.
 figure(); hold all;
-surf(a);
+surf([a;zeros(1,observation_length)]);
 %colormap cool;
 colorbar;
 xlabel('Words');
 ylabel('Tags');
 title('Matrix a, value of each state in %');
-set(gca,'YTick',(1:54),'YTickLabel',tag_vocabulary);
+set(gca,'YTick',(1:tag_vocabulary_length),'YTickLabel',tag_vocabulary);
 
 figure(); hold all;
 plot(cellfun(@strcmp, prediction, real_tags));
