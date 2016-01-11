@@ -20,20 +20,20 @@ __MACOS
 *.pydevproject
 .project
 .metadata
-projekt/bin/**
-projekt/tmp/**
-projekt/tmp/**/*
+projekt/Schiebepuzzel/bin/**
+projekt/Schiebepuzzel/tmp/**
+projekt/Schiebepuzzel/tmp/**/*
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-projekt/classpath
-projekt/settings/
-projekt/loadpath
+projekt/Schiebepuzzel/classpath
+projekt/Schiebepuzzel/settings/
+projekt/Schiebepuzzel/loadpath
 
 # External tool builders
-projekt/externalToolBuilders/
+projekt/Schiebepuzzel/externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
 *.launch
