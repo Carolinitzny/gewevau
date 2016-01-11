@@ -8,3 +8,32 @@
 *.user
 __MACOS
 *.class
+
+
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
+# eclipse specific git ignore
+*.pydevproject
+.project
+.metadata
+projekt/bin/**
+projekt/tmp/**
+projekt/tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+projekt/classpath
+projekt/settings/
+projekt/loadpath
+
+# External tool builders
+projekt/externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
