@@ -1,8 +1,12 @@
 clear; close all;
 
+disp('Reading hdt-1-10000-train.tags'); 
 A = tdfread('hdt-1-10000-train.tags');
 
+
 %%
+disp('Creating HMM...'); 
+
 words = cellstr(A.Konkursger0xC30xBCchte);
 tags = cellstr(A.NN);
 
@@ -52,7 +56,7 @@ for i = 2:length(words)
     observation_probs(fromTag,toWord) = observation_probs(fromTag,toWord)+1;
 end
 
-
+disp('HMM ready to use.');
 
 
 
@@ -60,7 +64,11 @@ end
 %% forward algorithm
 
 % use testfile as input for forward algorithm
+disp('Reading hdt-10001-12000-test.tags');
 B = tdfread('hdt-10001-12000-test.tags');
+
+disp('Starting forward algorithm');
+
 testwords = cellstr(B.x0xEF0xBB0xBFDazu);
 testtags = cellstr(B.PROAV);
 observations = testwords(1:100);
@@ -113,7 +121,7 @@ correct_tags = sum(cellfun(@strcmp, prediction, real_tags));
 error_tags = observation_length - correct_tags;
 
 
-disp('Error in %: ');
+disp('Total Error in %: ');
 (error_tags/observation_length)*100
 
 
