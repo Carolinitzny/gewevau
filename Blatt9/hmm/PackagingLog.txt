@@ -1,0 +1,23 @@
+ant:
+<ant>
+  <mkdir dir="C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_redistribution" />
+  <mkdir dir="C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_testing" />
+  <mkdir dir="C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_redistribution_files_only" />
+</ant>
+mcc -C -o hmm -W WinMain:hmm -T link:exe -d C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_testing -v C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm.m -a C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hdt-1-10000-train.tags -a C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hdt-10001-12000-test.tags 
+Compiler version: 6.0 (R2015a)
+Dependency analysis by REQUIREMENTS.
+[Warning: Adding path "C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9" to
+Compiler path instance.] 
+Parsing file "C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm.m"
+	(Referenced from: "Compiler Command Line").
+Deleting 0 temporary MEX authorization files.
+Generating file "C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_testing\readme.txt".
+Packaging...
+Adding custom icon C:\Program Files\MATLAB\R2015a\toolbox\compiler\Resources\default_icon.ico to C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_testing\hmm.exe.
+Attempting to embed the CTF archive into the application C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_testing\hmm.exe.
+Finished embedding CTF archive. Deleting the external CTF archive.
+Creating the bundle...
+Web based installer created at C:\Users\Steve\Documents\Uni\GWV\gewevau\Blatt9\hmm\for_redistribution\MyAppInstaller_web.exe.
+Packaging complete.
+Elapsed packaging time was: 3 minutes and 2 seconds.
