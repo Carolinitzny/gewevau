@@ -1,5 +1,3 @@
-\newcommand{\authorinfo}{Katja Möhring, Stephan Tietz, Carolin Konietzny}
-\newcommand{\titleinfo}{GWV, Blatt 07}
 
 % PREAMBLE ===============================================================
 
@@ -18,6 +16,10 @@
 \usepackage{tikz}
 \usepackage{fancyhdr}
 \usepackage{multicol}
+\usepackage{pdfpages}
+
+\newcommand{\authorinfo}{Katja Möhring, Stephan Tietz, Carolin Konietzny}
+\newcommand{\titleinfo}{GWV, Blatt 07}
 
 \usetikzlibrary{calc}
 \usetikzlibrary{patterns}
@@ -39,31 +41,40 @@
     \begin{description}
 
 
-    \item[Assumables]
+    \item[Assumables]  \hfill
         \begin{itemize}
             \item buttler\_worked
             \item buttler\_did\_not\_work
             \item gardener\_worked
             \item gardener\_did\_not\_work
         \end{itemize}
-    \item[Observations]
+    \item[Observations]  \hfill
         \begin{itemize}
             \item dirty_hands_buttler $\leftarrow$
             \item clean_hands_gardener $\leftarrow$
         \end{itemize}
-    \item[Regeln] 
-        clean\_hands\_buttler $\leftarrow$ buttler\_did\_not\_worked
-
-        dirty\_hands\_gardener $\leftarrow$ gardener\_worked
-
-    \item[Integrity Constraints]
+    \item[Regeln]   \hfill
+        \begin{itemize}
+            \item clean\_hands\_buttler $\leftarrow$ buttler\_did\_not\_work
+            \item dirty\_hands\_gardener $\leftarrow$ gardener\_worked
+        \end{itemize}
+    \item[Integrity Constraints]  \hfill
         \begin{itemize}
             \item false $\leftarrow$ dirty\_hands\_buttler $\wedge$ clean\_hands\_buttler
             \item false $\leftarrow$ dirty\_hands\_gardener $\wedge$ clean\_hands\_gardener
         \end{itemize}
-        
+    \includegraphics[scale=1]{aufgabe1_graph.jpg}   
 
+    \item[Minimaler Konflikt]  \hfill \\
+    \{buttler_did_not_work\} und \{gardener_worked\}
+
+    \item[Minimale Diagnose]  \hfill \\
+    \{buttler_did_not_work, gardener_worked\} \\
+    Es muss also gelten, dass der Buttler gearbeitet hat, bzw der Gärtner nicht gearbeitet hat, da es ansonsten zu einem Widerspruch kommen würde.
     \end{description}
-\item[\textbf{2.}]    
+\newpage
+\includepdf{S1.pdf}
+\includepdf{S2.pdf}
+\includepdf{S3.pdf}
 \end{enumerate}
 \end{document}
