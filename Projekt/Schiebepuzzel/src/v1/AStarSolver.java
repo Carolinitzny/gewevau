@@ -5,11 +5,9 @@ import java.util.PriorityQueue;
 public class AStarSolver {
 	public static GameState aStar(GameState start) {
 		PriorityQueue<GameState> queue = new PriorityQueue<GameState>();
-		while (true) {
+		queue.add(start);
+		while (!queue.isEmpty()) {
 			GameState nextState = queue.remove();
-			if (nextState == null) {
-				return null;
-			}
 			if (nextState.getRestkosten() == 0) {
 				return nextState;
 			}
@@ -17,6 +15,7 @@ public class AStarSolver {
 				queue.add(neighbour);
 			}
 		}
+		return null;
 	}
 
 }
