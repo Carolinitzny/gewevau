@@ -128,6 +128,18 @@ public class GameState implements Comparable<GameState> {
 		}
 	}
 
+	
+	public void setPredecessor(GameState predecessor) {
+		this.predecessor = predecessor;
+	}
+	
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
+	public void setRestkosten(int restkosten) {
+		this.restkosten = restkosten;
+	}
 	/**
 	 * 
 	 * @return den Spielstand in 2D-Array-Darstellung
@@ -151,17 +163,20 @@ public class GameState implements Comparable<GameState> {
 	}
 
 	public void print() {
+		
 		System.out.println("-------------------------------");
 		for (int i = 0; i < 4; i++) {
 			System.out.println("|" + gamestate[i][0] + "|" + gamestate[i][1] + "|" + gamestate[i][2] + "|"
 					+ gamestate[i][3] + "|");
 		}
+		System.out.println("-------------------------------");
+		
 	}
 	
 	
 	public String getID(){	
-		String ID = ""+gamestate[0][0];
-		for(int i = 1; i < 16; i++){
+		String ID = "";
+		for(int i = 0; i < 16; i++){
 			if(gamestate[i/4][i%4] < 10){
 				ID += "0"+gamestate[i/4][i%4];
 			}else{

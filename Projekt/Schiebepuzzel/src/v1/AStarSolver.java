@@ -21,9 +21,17 @@ public class AStarSolver {
 				return nextState;
 			}
 			for (GameState neighbour : nextState.getNeighbours()) {
-				if(!dict.containsKey(neighbour.getID())){
+				GameState actState = dict.get(neighbour.getID());
+				if(actState == null){
 					queue.add(neighbour);
 					dict.put(neighbour.getID(), neighbour);
+				}else{
+					//if(actState.getCost()+actState.getRestkosten()>neighbour.getCost()+neighbour.getRestkosten()){
+					//	dict.remove(actState.getID());
+					//	queue.remove(actState);
+					//	queue.add(neighbour);
+					//	dict.put(neighbour.getID(), neighbour);
+					//}
 				}
 			}
 		}

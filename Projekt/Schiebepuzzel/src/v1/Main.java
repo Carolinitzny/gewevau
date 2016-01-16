@@ -19,13 +19,18 @@ public class Main {
 		};
 		
 		//new GameStateVisualizer(new GameState(gameState,null,0));
-		
-		GameState target = AStarSolver.aStar(new GameState(gameState,null,0));
+		GameState start = new PuzzleMaker().makePuzzle(100);
+		start.print();
+		start.setPredecessor(null);
+		start.setCost(0);
+		start.setRestkosten(HeuristikCalculator.getRestkosten(start));
+		GameState target = AStarSolver.aStar(start);
 		System.out.println(target.getCost());
 		while(target!=null){
 			target.print();
 
 			System.out.println(target.getCost());
+			System.out.println();
 			target= target.getPredecessor();
 		}
 		
