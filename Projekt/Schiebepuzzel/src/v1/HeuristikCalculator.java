@@ -5,6 +5,8 @@ public class HeuristikCalculator {
 	/**
 	 * Berechnet die geschätzen Restkosten eines GameStates.
 	 * Grundlage der Berechnung ist die Simme der Manhatten Distanzen aller Tiles zu ihren Zielen.
+	 * Das leere Feld wird nicht mitgerechnet. Wenn alle anderen Tiles richtig liegen muss das leere
+	 * Feld auch richtig sein.
 	 * Ziel-Spielfeld:
 	 *  _____________
 	 * |  1  2  3  4 |
