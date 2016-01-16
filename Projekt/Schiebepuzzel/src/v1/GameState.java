@@ -154,5 +154,19 @@ public class GameState implements Comparable<GameState> {
 					+ gamestate[i][2] + "|" + gamestate[i][3] + "|");
 		}
 	}
+	
+	
+	public String getID(){	
+		String ID = ""+gamestate[0][0];
+		for(int i = 1; i < 16; i++){
+			if(gamestate[i/4][i%4] < 10){
+				ID += "0"+gamestate[i/4][i%4];
+			}else{
+				ID += gamestate[i/4][i%4];
+			}
+		}
+		
+		return ID;
+	}
 
 }

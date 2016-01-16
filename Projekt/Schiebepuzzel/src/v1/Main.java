@@ -14,13 +14,13 @@ public class Main {
 		byte[][] gameState = {
 				{1,2,3,4},
 				{5,6,7,8},
-				{0,10,11,12},
-				{13,14,15,15},			
+				{9,10,11,12},
+				{13,15,14,0},			
 		};
 		
 		//new GameStateVisualizer(new GameState(gameState,null,0));
 		
-		GameState target = new AStarSolver().aStar(new GameState(gameState,null,0));
+		GameState target = AStarSolver.aStar(new GameState(gameState,null,0));
 		System.out.println(target.getCost());
 		while(target!=null){
 			target.print();
