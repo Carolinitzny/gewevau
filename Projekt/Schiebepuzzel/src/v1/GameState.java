@@ -10,6 +10,10 @@ public class GameState implements Comparable<GameState> {
 	private int restkosten;
 	private GameState predecessor;
 	private int[] freeTile;
+	public static GameState END = new GameState(new byte[][]{{1, 2, 3, 4},
+	                                              {5, 6, 7, 8},
+	                                              {9, 10, 11, 12},
+	                                              {13, 14, 15, 0}}, null, 0);
 
 	public GameState(byte[][] init, GameState predecessor, int kosten) {
 		gamestate = init;
@@ -72,7 +76,7 @@ public class GameState implements Comparable<GameState> {
 		return result;
 	}
 
-	private GameState right() {
+	public GameState right() {
 		if (freeTile[1] == gamestate[0].length - 1) {
 			return null;
 		} else {
@@ -81,11 +85,11 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x][y + 1];
 			gamestateNew[x][y + 1] = 0;
-			return new GameState(gamestateNew, this, cost+1);
+			return new GameState(gamestateNew, this, cost + 1);
 		}
 	}
 
-	private GameState left() {
+	public GameState left() {
 		if (freeTile[1] == 0) {
 			return null;
 		} else {
@@ -94,11 +98,11 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x][y - 1];
 			gamestateNew[x][y - 1] = 0;
-			return new GameState(gamestateNew, this, cost+1);
+			return new GameState(gamestateNew, this, cost + 1);
 		}
 	}
 
-	private GameState down() {
+	public GameState down() {
 		if (freeTile[0] == gamestate.length - 1) {
 			return null;
 		} else {
@@ -107,11 +111,11 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x + 1][y];
 			gamestateNew[x + 1][y] = 0;
-			return new GameState(gamestateNew, this, cost+1);
+			return new GameState(gamestateNew, this, cost + 1);
 		}
 	}
 
-	private GameState up() {
+	public GameState up() {
 		if (freeTile[0] == 0) {
 			return null;
 		} else {
@@ -120,7 +124,7 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x - 1][y];
 			gamestateNew[x - 1][y] = 0;
-			return new GameState(gamestateNew, this, cost+1);
+			return new GameState(gamestateNew, this, cost + 1);
 		}
 	}
 
@@ -132,7 +136,6 @@ public class GameState implements Comparable<GameState> {
 		return gamestate;
 	}
 
-	
 	private byte[][] copy(byte[][] arr) {
 		byte[][] neu = new byte[arr.length][arr[0].length];
 		for (int x = 0; x < neu.length; ++x) {
@@ -150,8 +153,8 @@ public class GameState implements Comparable<GameState> {
 	public void print() {
 		System.out.println("-------------------------------");
 		for (int i = 0; i < 4; i++) {
-			System.out.println("|"+gamestate[i][0] + "|" + gamestate[i][1] + "|"
-					+ gamestate[i][2] + "|" + gamestate[i][3] + "|");
+			System.out.println("|" + gamestate[i][0] + "|" + gamestate[i][1] + "|" + gamestate[i][2] + "|"
+					+ gamestate[i][3] + "|");
 		}
 	}
 
