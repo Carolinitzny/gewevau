@@ -2,6 +2,7 @@ package v1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
 
 public class GameState implements Comparable<GameState> {
 
@@ -10,6 +11,12 @@ public class GameState implements Comparable<GameState> {
 	private int restkosten;
 	private GameState predecessor;
 	private int[] freeTile;
+	
+	/**
+	 * booleans indicating wether this gamestate has been discovere by the forward or backward A*
+	 */
+	private boolean forward, bachward;
+
 	public static GameState END = new GameState(new byte[][]{{1, 2, 3, 4},
 	                                              {5, 6, 7, 8},
 	                                              {9, 10, 11, 12},
@@ -165,6 +172,12 @@ public class GameState implements Comparable<GameState> {
 	public void print() {
 		
 		System.out.println("-------------------------------");
+		if(isForward()){
+			System.out.println("### FORWARD ###");
+		}else if(isBackward()) {
+			System.out.println("### BACKWARD ###");
+		}
+		
 		for (int i = 0; i < 4; i++) {
 			System.out.println("|" + gamestate[i][0] + "|" + gamestate[i][1] + "|" + gamestate[i][2] + "|"
 					+ gamestate[i][3] + "|");
@@ -186,5 +199,23 @@ public class GameState implements Comparable<GameState> {
 		
 		return ID;
 	}
+	
+	
+	public void setForward(boolean forward) {
+		this.forward = forward;
+	}
+	
+	public void setBachward(boolean bachward) {
+		this.bachward = bachward;
+	}
+	
+	public boolean isForward(){
+		return forward;
+	}
+	
+	public boolean isBackward(){
+		return bachward;
+	}
+	
 
 }
