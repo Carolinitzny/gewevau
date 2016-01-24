@@ -17,7 +17,7 @@ public class HeuristikCalculator {
 	 * @param state Der aktuelle GameState
 	 * @return Summer der Distanzen
 	 */
-	public static int getRestkostenNoCOnf(GameState state){
+	public static int getRestkosten(GameState state){
 		
 		int restkosten = 0;
 		
@@ -40,17 +40,18 @@ public class HeuristikCalculator {
 	}
 	
 	
-	public static int getRestkosten(GameState state){
+	public static int getRestkostenToStart(GameState start, GameState current){
 		
 		int restkosten = 0;
 		
 		
 		for(int row = 0; row < 4; row++){
 			for(int col = 0; col < 4; col++){
-				int val = state.getGameState()[row][col];
+				int val = current.getGameState()[row][col];
 				if(val != 0){
-					int targetRow = (val-1)/4;
-					int targetCol = (val-1)%4;
+					int[] coords = start.findTile(val);
+					int targetRow = coords[0];
+					int targetCol = coords[1];
 					int rowDif = (int)Math.abs(targetRow - row);
 					int colDif = (int)Math.abs(targetCol - col);
 					
@@ -59,9 +60,6 @@ public class HeuristikCalculator {
 			}
 			
 		}
-		
-		
-		
 		
 		return restkosten;
 	}

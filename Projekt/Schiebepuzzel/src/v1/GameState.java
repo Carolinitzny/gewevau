@@ -11,43 +11,74 @@ public class GameState implements Comparable<GameState> {
 	private int restkosten;
 	private GameState predecessor;
 	private int[] freeTile;
+	private boolean closed;
 	
 	/**
 	 * booleans indicating wether this gamestate has been discovere by the forward or backward A*
 	 */
 	private boolean forward, bachward;
 
-	public static GameState END = new GameState(new byte[][]{{1, 2, 3, 4},
-	                                              {5, 6, 7, 8},
-	                                              {9, 10, 11, 12},
-	                                              {13, 14, 15, 0}}, null, 0);
 
-	public GameState(byte[][] init, GameState predecessor, int kosten) {
+
+	public GameState(byte[][] init, GameState predecessor, int kosten, boolean forward) {
 		gamestate = init;
 		this.predecessor = predecessor;
 		cost = kosten;
 		freeTile = findFreeTile();
-		restkosten = HeuristikCalculator.getRestkosten(this);
+
+		
+		if(forward ){
+			this.forward = true; 
+			restkosten = HeuristikCalculator.getRestkosten(this);
+		}else{ 
+				
+			this.bachward = true; 
+			restkosten = HeuristikCalculator.getRestkostenToStart(Main.START, this);
+		}
+		
 	}
 
-	private int[] findFreeTile() {
+	
+	public int[] findTile(int ID){
 		for (int x = 0; x < gamestate.length; ++x) {
 			for (int y = 0; y < gamestate[x].length; ++y) {
-				if (gamestate[x][y] == 0) {
+				if (gamestate[x][y] == ID) {
 					int[] koordinaten = { x, y };
 					return koordinaten;
 				}
 			}
 		}
 		return null;
+		
+	}
+	
+	private int[] findFreeTile() {
+		return findTile(0);
 	}
 
 	@Override
 	public int compareTo(GameState other) {
-		int total = cost + restkosten;
-		int totalOther = other.getCost() + other.getRestkosten();
-
-		return (-1) * (totalOther - total);
+		
+		if(isBackward()){
+			int total = cost + restkosten;
+			int totalOther = other.getCost() + other.getRestkosten();
+	
+			if(totalOther - total != 0){
+				return (-1) * (totalOther - total);
+			}else{
+				return other.getCost()-cost;
+			}
+		}else{
+			int total = cost + restkosten;
+			int totalOther = other.getCost() + other.getRestkosten();
+	
+			if(totalOther - total != 0){
+				return (-1) * (totalOther - total);
+			}else{
+				return other.getCost()-cost;
+			}
+		}
+			
 	}
 
 	public int getRestkosten() {
@@ -92,7 +123,7 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x][y + 1];
 			gamestateNew[x][y + 1] = 0;
-			return new GameState(gamestateNew, this, cost + 1);
+			return new GameState(gamestateNew, this, cost + 1, forward);
 		}
 	}
 
@@ -105,7 +136,7 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x][y - 1];
 			gamestateNew[x][y - 1] = 0;
-			return new GameState(gamestateNew, this, cost + 1);
+			return new GameState(gamestateNew, this, cost + 1, forward);
 		}
 	}
 
@@ -118,7 +149,7 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x + 1][y];
 			gamestateNew[x + 1][y] = 0;
-			return new GameState(gamestateNew, this, cost + 1);
+			return new GameState(gamestateNew, this, cost + 1, forward);
 		}
 	}
 
@@ -131,7 +162,7 @@ public class GameState implements Comparable<GameState> {
 			int y = freeTile[1];
 			gamestateNew[x][y] = gamestateNew[x - 1][y];
 			gamestateNew[x - 1][y] = 0;
-			return new GameState(gamestateNew, this, cost + 1);
+			return new GameState(gamestateNew, this, cost + 1, forward);
 		}
 	}
 
@@ -187,7 +218,12 @@ public class GameState implements Comparable<GameState> {
 	}
 	
 	
-	public String getID(){	
+	
+	/**
+	 * ID is a string combination of all the fields of the array 
+	 * @return
+	 */
+	public int getID(){	
 		String ID = "";
 		for(int i = 0; i < 16; i++){
 			if(gamestate[i/4][i%4] < 10){
@@ -197,7 +233,7 @@ public class GameState implements Comparable<GameState> {
 			}
 		}
 		
-		return ID;
+		return ID.hashCode();
 	}
 	
 	
@@ -217,5 +253,15 @@ public class GameState implements Comparable<GameState> {
 		return bachward;
 	}
 	
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
+	
+	public boolean isClosed(){
+		return closed;
+	}
+	
+	
 
+	
 }

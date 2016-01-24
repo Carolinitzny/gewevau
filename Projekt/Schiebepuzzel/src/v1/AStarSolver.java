@@ -1,14 +1,22 @@
 package v1;
 
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 public class AStarSolver {
+	
+	/**
+	 * Starts AStar algorithm at the specified start state.
+	 * @param start startState
+	 * @param outputIntervall stepsize fordebug output.
+	 * @return returns the target state, solution can be reconstructed via state.getPredecessor
+	 */
 	public static GameState aStar(GameState start, int outputIntervall) {
 		PriorityQueue<GameState> queue = new PriorityQueue<GameState>();
 		queue.add(start);
 		
-		TreeMap<String, GameState> dict = new TreeMap<String, GameState>();
+		TreeMap<Integer, GameState> dict = new TreeMap<Integer, GameState>();
 		dict.put(start.getID(), start);
 		
 		int i = 0;
@@ -25,13 +33,6 @@ public class AStarSolver {
 				if(actState == null){
 					queue.add(neighbour);
 					dict.put(neighbour.getID(), neighbour);
-				}else{
-					//if(actState.getCost()+actState.getRestkosten()>neighbour.getCost()+neighbour.getRestkosten()){
-					//	dict.remove(actState.getID());
-					//	queue.remove(actState);
-					//	queue.add(neighbour);
-					//	dict.put(neighbour.getID(), neighbour);
-					//}
 				}
 			}
 		}
@@ -39,16 +40,23 @@ public class AStarSolver {
 	}
 
 	
+	/**
+	 * Starts AStar both at the start and target state. Uses heuristic for both directions, 
+	 * already discovered states are saved in a dictionary (red-black tree).
+	 * @param start startState
+	 * @param outputIntervall stepsize for debug output.
+	 * @return returns the target state, solution can be reconstructed via state.getPredecessor
+	 */
 	public static GameState biDirAStar(GameState start, int outputIntervall) {
 		PriorityQueue<GameState> queue = new PriorityQueue<GameState>();
 		queue.add(start);
 		
 		PriorityQueue<GameState> backQueue = new PriorityQueue<GameState>();
-		backQueue.add(new GameState(GameState.END.getGameState(), null, 0));
+		backQueue.add(new GameState(Main.END.getGameState(), null, 0, false));
 		
-		TreeMap<String, GameState> dict = new TreeMap<String, GameState>();
+		TreeMap<Integer, GameState> dict = new TreeMap<Integer, GameState>();
 		dict.put(start.getID(), start);
-		dict.put(GameState.END.getID(), GameState.END);
+		dict.put(Main.END.getID(), Main.END);
 		
 		int i = 0;
 		while (!queue.isEmpty() && !backQueue.isEmpty()) {
@@ -58,6 +66,7 @@ public class AStarSolver {
 			if (nextState.getRestkosten() == 0) {
 				return nextState;
 			}
+			nextState.setClosed(true);
 			
 			if(i%outputIntervall==0)
 				System.out.println("Iter: "+ i + "	frontierForward: "+queue.size()+" frontierBackward: "+backQueue.size()+"	dict: "+dict.size()+"	(" + nextState.getCost() +"|" + nextState.getRestkosten()+"|"+(nextState.getCost() + nextState.getRestkosten())+")");
@@ -65,30 +74,32 @@ public class AStarSolver {
 			
 			for (GameState neighbour : nextState.getNeighbours()) {
 				GameState actState = dict.get(neighbour.getID());
-				if(actState == null){ //state wurde noch nicht entdeckt
-					neighbour.setForward(true);
+				if(actState == null){ //wenn: Nachbarstate wurde noch nicht entdeckt
+					neighbour.setForward(true); //Nachbarn in queue aufnehmen
 					queue.offer(neighbour);
 					dict.put(neighbour.getID(), neighbour);
-				}else{ //state wurde bereits entdeckt
-					if(actState.isBackward()){ //und zwar von back search
-						return invertQueue(nextState,actState);
+				}else{  //wenn: nachbarstate wurde schon entdeckt
+					if(actState.isBackward()&& actState.isClosed()){ //und zwar von back search
+						return invertQueue(nextState,actState); //ergebnis ausgeben, sonst nichts
 					}
 				}
 			}
 			
-			//backward move
 			
+			//backward move			
 			nextState = backQueue.remove();
+
+			nextState.setClosed(true);
 			
 			for (GameState neighbour : nextState.getNeighbours()) {
 				GameState actState = dict.get(neighbour.getID());
-				if(actState == null){ //state wurde noch nicht entdeckt
-					neighbour.setBachward(true);
+				if(actState == null){ //wenn: Nachbarstate wurde noch nicht entdeckt
+					neighbour.setBachward(true); //Nachbarn in queue aufnehmen
 					backQueue.offer(neighbour);
 					dict.put(neighbour.getID(), neighbour);
-				}else{ //state wurde bereits entdeckt
-					if(actState.isForward()){ //und zwar von back search
-						return invertQueue(actState,nextState);
+				}else{ //wenn: nachbarstate wurde schon entdeckt
+					if(actState.isForward() && actState.isClosed()){ //und zwar von vorwärtssuche
+						return invertQueue(actState,nextState); //ergebnis ausgeben, sonst nichts
 					}
 				}
 			}
@@ -98,6 +109,33 @@ public class AStarSolver {
 	}
 	
 	
+	
+	public static GameState HashMapAStar(GameState start, int outputIntervall){
+		PriorityQueue<GameState> open = new PriorityQueue<GameState>();
+		HashMap<Integer, GameState> closed= new HashMap<Integer, GameState>();
+		PriorityQueue<GameState> backOpen = new PriorityQueue<GameState>();
+		HashMap<Integer, GameState> backClosed= new HashMap<Integer, GameState>();
+		
+		
+		
+		open.offer(start);
+		backOpen.offer(new GameState(Main.END.getGameState(), null, 0,false));
+		
+		while((!open.isEmpty()) && (!backOpen.isEmpty())){
+			
+			GameState current = open.poll();
+			closed.put(current.getID(), current);
+			
+			
+			for (GameState neighbour : current.getNeighbours()) {
+				
+			}
+			
+		}
+		
+		
+		return null;
+	}
 	
 	private static GameState invertQueue(GameState forward, GameState backward){
 		GameState predecessor = forward;
