@@ -94,7 +94,6 @@ public class Main {
 	 * @param target
 	 */
 	public static void printLoesungsweg(GameState target) {
-		int cost= target.getCost();
 		while (target != null) {
 			target.print();
 			System.out.println(target.getCost());

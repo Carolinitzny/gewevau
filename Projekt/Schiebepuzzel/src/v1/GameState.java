@@ -56,29 +56,24 @@ public class GameState implements Comparable<GameState> {
 		return findTile(0);
 	}
 
+	
+	/**
+	 * Used for priority queues.
+	 * If two states have the same combined value (heuristic +cost), then comparison is only done by real costs, 
+	 * to prefer states that are close to the solution
+	 */
 	@Override
 	public int compareTo(GameState other) {
-		
-		if(isBackward()){
-			int total = cost + restkosten;
-			int totalOther = other.getCost() + other.getRestkosten();
-	
-			if(totalOther - total != 0){
-				return (-1) * (totalOther - total);
-			}else{
-				return other.getCost()-cost;
-			}
-		}else{
-			int total = cost + restkosten;
-			int totalOther = other.getCost() + other.getRestkosten();
-	
-			if(totalOther - total != 0){
-				return (-1) * (totalOther - total);
-			}else{
-				return other.getCost()-cost;
-			}
+
+		int total = cost + restkosten;
+		int totalOther = other.getCost() + other.getRestkosten();
+
+		if (totalOther - total != 0) {
+			return (-1) * (totalOther - total);
+		} else {
+			return other.getCost() - cost;
 		}
-			
+
 	}
 
 	public int getRestkosten() {
@@ -200,6 +195,10 @@ public class GameState implements Comparable<GameState> {
 		return predecessor;
 	}
 
+	
+	/**
+	 * Prints this state nicely looking
+	 */
 	public void print() {
 		
 		System.out.println("-------------------------------");
@@ -220,7 +219,7 @@ public class GameState implements Comparable<GameState> {
 	
 	
 	/**
-	 * ID is a string combination of all the fields of the array 
+	 * ID is a string combination of all the fields of the array, to hashCode 
 	 * @return
 	 */
 	public int getID(){	
