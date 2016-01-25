@@ -98,6 +98,7 @@ public class Main {
 			target.print();
 			System.out.println(target.getCost());
 			System.out.println();
+			new GameStateVisualizer(target);
 			target = target.getPredecessor();
 		}
 		

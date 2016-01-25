@@ -4,8 +4,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 public class GameTile extends JPanel{
 
@@ -20,6 +22,7 @@ public class GameTile extends JPanel{
 		this.master = master;
 		this.add(new JLabel(""+nr));
 		this.initMouseListener();
+		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 	}
 	
 	
