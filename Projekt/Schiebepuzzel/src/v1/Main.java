@@ -94,11 +94,12 @@ public class Main {
 	 * @param target
 	 */
 	public static void printLoesungsweg(GameState target) {
+		GameStateVisualizer g = new GameStateVisualizer(target);
 		while (target != null) {
 			target.print();
 			System.out.println(target.getCost());
 			System.out.println();
-			new GameStateVisualizer(target);
+			g.addGameState(target);
 			target = target.getPredecessor();
 		}
 		
